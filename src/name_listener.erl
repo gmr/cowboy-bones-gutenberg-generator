@@ -30,7 +30,7 @@ start_link() ->
 %% ------------------------------------------------------------------
 
 init([]) ->
-    Dispatch = cowboy_router:compile(routes()),
+    Dispatch = cowboy_router:compile({{NAME}}_routes:get()),
     cowboy:start_http({{NAME}}_cowboy_listener,
                       listener_count(),
                       [{port, port()}],
