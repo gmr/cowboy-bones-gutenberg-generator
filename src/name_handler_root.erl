@@ -27,14 +27,14 @@ terminate(_Reason, _Req, _State) ->
 handle_html(Req, State) ->
     Opts = [{translation_fun, ?TRANSLATE,
             {locale, cowboy_req:meta(language, Req)}],
-    {ok, Body} = editor_dtl:render(data(), Opts),
+    {ok, Body} = editor_dtl:render(data(Req), Opts),
     Headers = [{<<"Content-Type">>, ?MIME_TYPE_HTML}],
     {ok, Req2} = cowboy_req:reply(200, Headers, Body, Req),
     {ok, Req2, State}.
 
 handle_json(Req, State) ->
     Headers = [{<<"Content-Type">>, ?MIME_TYPE_JSON}],
-    {ok, Req2} = cowboy_req:reply(200, Headers, jsx:encode(data()), Req),
+    {ok, Req2} = cowboy_req:reply(200, Headers, jsx:encode(data(Req)), Req),
     {ok, Req2, State}.
 
 
