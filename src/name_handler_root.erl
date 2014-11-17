@@ -1,6 +1,6 @@
 -module({{NAME}}_handler_root).
 
--export([init/3,
+-export([init/2,
          content_types_provided/2,
          handle_html/2,
          handle_json/2,
