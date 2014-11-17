@@ -11,7 +11,6 @@
          handle_cast/2,
          handle_info/2,
          terminate/2,
-         language/1,
          code_change/3]).
 
 
@@ -59,24 +58,24 @@ code_change(_OldVsn, State, _Extra) ->
 %% ------------------------------------------------------------------
 
 on_response(Code, _Headers, _Body, Req) when is_integer(Code), Code >= 400 ->
-  Message = proplists:get_value(Code, ?STATUS_CODES, <<"Undefined Error Code">>),
-  Opts = [{translation_fun, ?TRANSLATE,
-          {locale, cowboy_req:meta(language, Req)}],
-  {ok, Body} = error_page_dtl:render([{code, integer_to_list(Code)},
-                                      {message, Message}], Opts),
-  Headers = [{<<"Content-Type">>, <<"text/html">>}],
-  {ok, Req2} = cowboy_req:reply(Code, Headers, Body, Req),
-  Req2;
+    Message = proplists:get_value(Code, ?STATUS_CODES, <<"Undefined Error Code">>),
+    Opts = [{translation_fun, ?TRANSLATE,
+            {locale, cowboy_req:meta(language, Req)}],
+    {ok, Body} = error_page_dtl:render([{code, integer_to_list(Code)},
+                                        {message, Message}], Opts),
+    Headers = [{<<"Content-Type">>, <<"text/html">>}],
+    {ok, Req2} = cowboy_req:reply(Code, Headers, Body, Req),
+    Req2;
 
 on_response(_Code, _Headers, _Body, Req) ->
-	Req.
+    Req.
 
 
 port() ->
-  case os:getenv("PORT") of
-    false ->
-      {ok, Port} = application:get_env(http_port),
-      Port;
-    Other ->
-      list_to_integer(Other)
-  end.
+    case os:getenv("PORT") of
+        false ->
+            {ok, Port} = application:get_env(http_port),
+            Port;
+        Other ->
+            list_to_integer(Other)
+    end.
