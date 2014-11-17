@@ -14,5 +14,4 @@ start(_StartType, _StartArgs) ->
     {{NAME}}_sup:start_link().
 
 stop(_State) ->
-    stop_apps(?APPS),
     ok.
