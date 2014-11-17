@@ -2,4 +2,4 @@ postinstall:
   commands:
     - make
   message:
-    Run `make app shell` to launch the application.
+    Project has been created.

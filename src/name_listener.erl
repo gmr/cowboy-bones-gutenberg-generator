@@ -32,9 +32,10 @@ start_link() ->
 init([]) ->
     Dispatch = cowboy_router:compile(routes()),
     cowboy:start_http({{NAME}}_cowboy_listener,
-                      ?ACCEPTORS,
+                      listener_count(),
                       [{port, port()}],
                       [{env, [{dispatch, Dispatch}]},
+                       {timeout, timeout()},
                        {onresponse, fun on_response/4}]),
     {ok, {}}.
 
@@ -71,10 +72,22 @@ on_response(_Code, _Headers, _Body, Req) ->
     Req.
 
 
+listener_count() ->
+    get_int_val("HTTP_LISTENER_COUNT", http_listener_count).
+
+
 port() ->
-    case os:getenv("PORT") of
+    get_int_val("HTTP_PORT", http_port).
+
+
+timeout() ->
+    get_int_val("HTTP_TIMEOUT", http_timeout).
+
+
+get_int_val(OS, App) ->
+    case os:getenv(OS) of
         false ->
-            {ok, Port} = application:get_env(http_port),
+            {ok, Port} = application:get_env(App),
             Port;
         Other ->
             list_to_integer(Other)
