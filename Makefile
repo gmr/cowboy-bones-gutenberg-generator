@@ -23,6 +23,9 @@ CSS_OUT = static/css/{{NAME}}.css
 
 all: deps compile static po
 
+bower:
+	bower install
+
 less:
 	@( $(LESSC) --verbose -x --source-map=${CSS_OUT}.map --include-path=${LESS_INCLUDE} ${LESS_IN} ${CSS_OUT} )
 
@@ -31,7 +34,7 @@ fonts:
 
 static: less fonts
 
-deps:
+deps: bower
 	@( $(REBAR) get-deps )
 
 compile: clean
