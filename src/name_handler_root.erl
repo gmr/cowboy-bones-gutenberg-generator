@@ -1,16 +1,15 @@
 -module({{NAME}}_handler_root).
 
--export([init/2,
+-export([init/3,
          content_types_provided/2,
          handle_html/2,
          handle_json/2,
-         languages_provided/2,
          terminate/3]).
 
 -include("{{NAME}}.hrl").
 
-init(Req, Opts) ->
-	{cowboy_rest, Req, Opts}.
+init(_Transport, _Req, _Opts) ->
+    {upgrade, protocol, cowboy_rest}.
 
 content_types_provided(Req, State) ->
 	{[
@@ -18,28 +17,50 @@ content_types_provided(Req, State) ->
 		{?MIME_TYPE_JSON, handle_json}
 	], Req, State}.
 
-languages_provided(Req, State) ->
-    {gettext:all_lcs(), Req, State}.
-
 terminate(_Reason, _Req, _State) ->
     ok.
 
 handle_html(Req, State) ->
     Opts = [{translation_fun, ?TRANSLATE,
             {locale, cowboy_req:meta(language, Req)}],
-    {ok, Body} = editor_dtl:render(data(Req), Opts),
-    Headers = [{<<"Content-Type">>, ?MIME_TYPE_HTML}],
-    {ok, Req2} = cowboy_req:reply(200, Headers, Body, Req),
-    {ok, Req2, State}.
+    {ok, Body} = home_dtl:render(data(Req), Opts),
+    {Body, Req, State}.
 
 handle_json(Req, State) ->
-    Headers = [{<<"Content-Type">>, ?MIME_TYPE_JSON}],
-    {ok, Req2} = cowboy_req:reply(200, Headers, jsx:encode(data(Req)), Req),
-    {ok, Req2, State}.
-
+    Data = {data(Req)},
+    io:format("Data to encode: ~p~n", [Data]),
+    {jiffy:encode(Data), Req, State}.
 
 data(Req) ->
-    [
-        {language, cowboy_req:meta(language, Req)},
-        {available, gettext:all_lcs()}
-    ].
+    {RawHeaders, _} = cowboy_req:headers(Req),
+    Headers = [{maybe_fix(K), V} || {K, V} <- RawHeaders],
+    [{headers, {Headers}},
+     {apps, [[list_to_binary(atom_to_list(A)),
+              list_to_binary(D),
+              list_to_binary(V)] || {A, D, V} <- application:loaded_applications()]},
+     {memory, {[{list_to_binary(atom_to_list(K)), V} || {K, V} <- erlang:memory()]}},
+     {language, unknown},
+     {node, erlang:node()},
+     {system_version, list_to_binary(erlang:system_info(system_version))},
+     {proc_count, erlang:system_info(process_count)},
+     {architecture, list_to_binary(erlang:system_info(system_architecture))}].
+
+maybe_fix(K) ->
+    list_to_binary([maybe_replace_dash(X) || X <- binary_to_list(K)]).
+
+maybe_replace_dash(K) ->
+    case K of
+        45 -> "_";
+        _ -> K
+    end.
+
+maybe_nest(V) ->
+    case is_proplist(V) of
+        true -> {V};
+        false -> V
+    end.
+
+is_proplist(V) when is_list(V) ->
+    IsAtom = fun(X) when is_atom(X) -> true; ({X,_}) when is_atom(X) -> true; (_) -> false end,
+    lists:all(IsAtom, V);
+is_proplist(_) -> false.

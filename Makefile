@@ -3,8 +3,8 @@ REBAR = `which rebar`
 RELX = `which relx`
 XGETTEXT = `which xgettext`
 
-NAME = {{NAME}}
-COMPANY = {{NAME}}
+NAME = cowtest
+COMPANY = cowtest
 VERSION = 0.1.0
 YEAR = `date +%Y`
 FULLNAME = `git config --global --get user.name`
@@ -18,42 +18,43 @@ PO_PATH = $(GETTEXT_DIR)/lang/default/$(DEFAULT_LANGUAGE)
 BOOTSTRAP = bower_components/bootstrap
 
 LESS_INCLUDE = ${BOOTSTRAP}/less
-LESS_IN = static/less/bootstrap.less
-CSS_OUT = static/css/{{NAME}}.css
+LESS_IN = ${LESS_INCLUDE}/bootstrap.less
+CSS_OUT = static/css/cowtest.css
 
-all: deps compile
+all: deps po compile
 
 bower:
 	bower install
 
-less:
-	@( $(LESSC) --verbose -x --source-map=${CSS_OUT}.map --include-path=${LESS_INCLUDE} ${LESS_IN} ${CSS_OUT} )
+bootstrap: bower
+	@( cp -R $(BOOTSTRAP)/dist/* static/ )
 
-static: less
+static: bootstrap
 
-deps:
+deps: bootstrap
 	@( $(REBAR) get-deps )
 
-compile: clean
+compile:
 	@( $(REBAR) compile )
 
 clean:
 	@( $(REBAR) clean )
 	@( rm -f static/css/* )
 	@( rm -f static/fonts/* )
+	@( rm -f static/js/* )
 	@( rm -f erl_crash.dump )
 	@( rm -f $(PO_PATH)/gettext.po )
 	@( rm -f translations/gettext_server_db.dets )
 
 run:
-	@( erl -pa  ebin deps/*/ebin -s {{NAME}} )
+	@( erl -pa  ebin deps/*/ebin -s cowtest )
 
 release: compile
 	@( $(RELX) release )
 
 po:
 	@( mkdir -p $(PO_PATH) )
-	@( $(XGETTEXT) -L c -k_ -d gettext -s -p $(PO_PATH) --package-name="$(NAME)" --package-version="$(VERSION)" templates/*.dtl templates/*/*.dtl templates/*/*/*.dtl )
+	@( $(XGETTEXT) -L c -k_ -d gettext -s -p $(PO_PATH) --package-name="$(NAME)" --package-version="$(VERSION)" templates/*.dtl )
 	@( sed -i "" "s/YEAR/$(YEAR)/g" $(PO_PATH)/gettext.po )
 	@( sed -i "" "s/THE PACKAGE'S COPYRIGHT HOLDER/$(COMPANY)/g" $(PO_PATH)/gettext.po )
 	@( sed -i "" "s/SOME DESCRIPTIVE TITLE./$(NAME)/g" $(PO_PATH)/gettext.po )
