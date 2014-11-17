@@ -4,8 +4,8 @@ RELX = `which relx`
 XGETTEXT = `which xgettext`
 
 NAME = {{NAME}}
-COMPANY = Poison Pen LLC
-VERSION = 2.0.0
+COMPANY = {{NAME}}
+VERSION = 0.1.0
 YEAR = `date +%Y`
 FULLNAME = `git config --global --get user.name`
 EMAIL = `git config --global --get user.email`
@@ -16,13 +16,10 @@ DEFAULT_LANGUAGE = en
 PO_PATH = $(GETTEXT_DIR)/lang/default/$(DEFAULT_LANGUAGE)
 
 BOOTSTRAP = bower_components/bootstrap
-CODEMIRROR = bower_components/codemirror
-FONTAWESOME = bower_components/font-awesome
 
 LESS_INCLUDE = ${BOOTSTRAP}/less:${CODEMIRROR}/lib:${FONTAWESOME}/less
 LESS_IN = static/less/bootstrap.less
-CSS_OUT = static/css/privatepaste.css
-
+CSS_OUT = static/css/{{NAME}}.css
 
 all: deps compile static po
 
@@ -46,7 +43,7 @@ clean:
 	@( rm -f static/fonts/* )
 	@( rm -f erl_crash.dump )
 	@( rm -f $(PO_PATH)/gettext.po )
-	@( rm translations/gettext_server_db.dets )
+	@( rm -f translations/gettext_server_db.dets )
 
 run:
 	@( erl -pa  ebin deps/*/ebin -s privatepaste )
