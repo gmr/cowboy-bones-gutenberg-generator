@@ -1,0 +1,26 @@
+{application, {{NAME}},
+ [
+  {description, "Cowboy Application"},
+  {vsn, "0.1.0"},
+  {applications,
+    [
+     kernel,
+     stdlib,
+     lager,
+     sasl,
+     crypto,
+     ranch,
+     cowlib,
+     cowboy,
+     compiler,
+     syntax_tools,
+     erlydtl
+    ]},
+  {modules, []},
+  {mod, {{{NAME}}, []}},
+  {env, [{http_port, 8080},
+         {http_listener_count, 100},
+         {http_timeout, 12000},
+         {http_compress, true}]}
+ ]
+}.
