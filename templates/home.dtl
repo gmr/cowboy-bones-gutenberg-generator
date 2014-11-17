@@ -65,7 +65,7 @@
     </tr>
   </thead>
   <tbody>
-  {% for row in memory %}{% for key, value in row %}
+  {% for row in headers %}{% for key, value in row %}
   <tr>
     <td><strong>{{ key }}</strong></td>
     <td><code>{{ value }}</code></td>
