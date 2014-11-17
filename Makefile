@@ -21,7 +21,7 @@ LESS_INCLUDE = ${BOOTSTRAP}/less
 LESS_IN = static/less/bootstrap.less
 CSS_OUT = static/css/{{NAME}}.css
 
-all: deps compile po
+all: deps compile
 
 bower:
 	bower install
