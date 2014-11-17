@@ -17,11 +17,11 @@ PO_PATH = $(GETTEXT_DIR)/lang/default/$(DEFAULT_LANGUAGE)
 
 BOOTSTRAP = bower_components/bootstrap
 
-LESS_INCLUDE = ${BOOTSTRAP}/less:${CODEMIRROR}/lib:${FONTAWESOME}/less
+LESS_INCLUDE = ${BOOTSTRAP}/less
 LESS_IN = static/less/bootstrap.less
 CSS_OUT = static/css/{{NAME}}.css
 
-all: deps compile static po
+all: deps compile po
 
 bower:
 	bower install
@@ -29,12 +29,9 @@ bower:
 less:
 	@( $(LESSC) --verbose -x --source-map=${CSS_OUT}.map --include-path=${LESS_INCLUDE} ${LESS_IN} ${CSS_OUT} )
 
-fonts:
-	@( cp ${FONTAWESOME}/fonts/* static/fonts/ )
+static: less
 
-static: less fonts
-
-deps: bower
+deps:
 	@( $(REBAR) get-deps )
 
 compile: clean
@@ -49,7 +46,7 @@ clean:
 	@( rm -f translations/gettext_server_db.dets )
 
 run:
-	@( erl -pa  ebin deps/*/ebin -s privatepaste )
+	@( erl -pa  ebin deps/*/ebin -s {{NAME}} )
 
 release: compile
 	@( $(RELX) release )

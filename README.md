@@ -8,7 +8,7 @@ Application Dependencies
 ------------------------
 The following applications are expected to be installed in a global scope:
 
-- gettext
+- xgettext
 - bower
 - lessc
 
