@@ -6,8 +6,6 @@
          handle_json/2,
          languages_provided/2,
          terminate/3]).
--export([handle/2]).
--export([terminate/3]).
 
 -include("{{NAME}}.hrl").
 
