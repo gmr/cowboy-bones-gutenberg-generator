@@ -58,7 +58,7 @@ code_change(_OldVsn, State, _Extra) ->
 on_response(Code, _Headers, _Body, Req) when is_integer(Code), Code >= 400 ->
     Message = proplists:get_value(Code, ?STATUS_CODES, <<"Undefined Error Code">>),
     Opts = [{translation_fun, ?TRANSLATE,
-            {locale, {{NAME}}_util::get_language(Req)}],
+            {locale, {{NAME}}_util:get_language(Req)}],
     {ok, Body} = error_page_dtl:render([{code, integer_to_list(Code)},
                                         {message, Message}], Opts),
     Headers = [{<<"Content-Type">>, <<"text/html">>}],
