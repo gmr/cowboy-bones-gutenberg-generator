@@ -1,7 +1,7 @@
 -module({{NAME}}_util).
 
 -export([get_int_value/2,
-         get_language/2]).
+         get_language/1]).
 
 get_int_value(OS, App) ->
     case os:getenv(OS) of
