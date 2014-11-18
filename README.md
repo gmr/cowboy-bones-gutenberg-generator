@@ -1,9 +1,15 @@
 cowboy-bones-gutenberg-generator
 ================================
 
-A Gutenberg generator for creating a full-stack Cowboy (2.0.0 pre1) application
-with templating, i18n, logging, JSON support, and an example page using Bootstrap
+A Gutenberg generator for creating a Cowboy (2.0.0 pre1) application with
+templating, i18n, logging, JSON support, and an example page using Bootstrap
 for UI formatting.
+
+The request handler will respect the ``Accept`` header for both ``text/html``
+and ``application/json`` values. Additionally, the HTML view will demonstrate
+how to use translations with the ``Accept-Language`` header. There are two
+translations out of the box, one for English (the default and ``en``) the
+other is Spanish (``es``).
 
 Application Dependencies
 ------------------------
