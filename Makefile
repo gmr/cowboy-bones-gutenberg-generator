@@ -19,7 +19,7 @@ BOOTSTRAP = bower_components/bootstrap
 all: deps po compile
 
 bower:
-	@( bower install )
+	@( bower -s install )
 
 bootstrap: bower
 	@( cp -R $(BOOTSTRAP)/dist/* static/ )
