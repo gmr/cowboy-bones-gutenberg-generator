@@ -3,7 +3,7 @@
 -export([get_int_value/2,
          get_language/2]).
 
-get_int_val(OS, App) ->
+get_int_value(OS, App) ->
     case os:getenv(OS) of
         false ->
             {ok, Port} = application:get_env(App),
