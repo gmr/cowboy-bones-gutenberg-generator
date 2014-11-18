@@ -1,5 +1,4 @@
 postinstall:
-  commands:
-    - make
   message:
-    Project has been created. Use "make run" to run interactively.
+    Project has been created. Download dependencies and compile with "make".
+    Use "make run" to run interactively.
