@@ -2,4 +2,4 @@ postinstall:
   commands:
     - make
   message:
-    Project has been created.
+    Project has been created. Use "make run" to run interactively.

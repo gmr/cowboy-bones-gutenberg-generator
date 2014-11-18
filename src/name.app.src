@@ -1,19 +1,15 @@
 {application, {{NAME}},
  [
-  {description, "Cowboy Application"},
+  {description, "Gutenberg generated Cowboy Application"},
   {vsn, "0.1.0"},
   {applications,
     [
      kernel,
      stdlib,
      lager,
-     sasl,
-     crypto,
-     ranch,
-     cowlib,
      cowboy,
-     compiler,
-     syntax_tools,
+     jiffy,
+     gettext,
      erlydtl
     ]},
   {modules, []},

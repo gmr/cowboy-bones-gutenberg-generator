@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="{{language}}">
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -9,9 +9,18 @@
   </head>
   <body>
     <div class="container">
+      <h1>{{NAME}}</h1>
       {% block content %}Unextended Template{% endblock %}
     </div>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
     <script src="/static/js/bootstrap.min.js"></script>
   </body>
+  <footer>
+    <div class="container">
+      <hr>
+      <div class="text-right">
+        {% now "Y-m-d H:i:s" %}
+      </div>
+    </div>
+  </footer>
 </html>

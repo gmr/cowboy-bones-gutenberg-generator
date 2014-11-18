@@ -1,10 +1,9 @@
-LESSC = `which lessc`
 REBAR = `which rebar`
 RELX = `which relx`
 XGETTEXT = `which xgettext`
 
-NAME = cowtest
-COMPANY = cowtest
+NAME = {{NAME}}
+COMPANY = {{NAME}}
 VERSION = 0.1.0
 YEAR = `date +%Y`
 FULLNAME = `git config --global --get user.name`
@@ -16,10 +15,6 @@ DEFAULT_LANGUAGE = en
 PO_PATH = $(GETTEXT_DIR)/lang/default/$(DEFAULT_LANGUAGE)
 
 BOOTSTRAP = bower_components/bootstrap
-
-LESS_INCLUDE = ${BOOTSTRAP}/less
-LESS_IN = ${LESS_INCLUDE}/bootstrap.less
-CSS_OUT = static/css/cowtest.css
 
 all: deps po compile
 
@@ -47,7 +42,7 @@ clean:
 	@( rm -f translations/gettext_server_db.dets )
 
 run:
-	@( erl -pa  ebin deps/*/ebin -s cowtest )
+	@( erl -pa  ebin deps/*/ebin -s {{NAME}} )
 
 release: compile
 	@( $(RELX) release )

@@ -1,76 +1,74 @@
 {% extends "base.dtl" %}
-{% block title %}{{NAME}} {{ _("Application Report") }}{% endblock %}
+{% block title %}cowtest {{ _("Application Report") }}{% endblock %}
 {% block content %}
-<h1>{{NAME}} {{ _("Application Report") }}</h1>
-<dl class="dl-horizontal">
-  <dt>{{ _("Node") }}</dt>
-  <dd><code>{{ node }}</code></dd>
-  <dt>{{ _("Erlang Version") }}</dt>
-  <dd><code>{{ system_version }}</code></dd>
-  <dt>{{ _("Running Processes") }}</dt>
-  <dd>{{ proc_count }}</dd>
-  <dt>{{ _("System Architecture") }}</dt>
-  <dd><code>{{ architecture }}</code></dd>
-<dt>{{ _("Language") }}</dt>
-<dd><code>{{ language }}</code></dd>
-</dl>
-<div class="row">
-  <div class="col-sm-6">
-    <h2>{{ _("Loaded Applications") }}</h2>
-    <table class="table table-hover table-striped table-bordered">
-      <thead>
-        <tr>
-          <th>{{ _("Application") }}</th>
-          <th>{{ _("Description") }}</th>
-          <th>{{ _("Version") }}</th>
-        </tr>
-      </thead>
-      <tbody>
-      {% for key, desc, version in apps %}
-      <tr>
-        <td><strong>{{ key }}</strong></td>
-        <td><code>{{ version }}</code></td>
-        <td>{{ desc }}</td>
-      </tr>
-      {% endfor %}
-      </tbody>
-    </table>
-  </div>
-  <div class="col-sm-6">
-    <h2>{{ _("Memory Utilization") }}</h2>
-    <table class="table table-hover table-striped table-bordered">
-      <thead>
-        <tr>
-          <th>{{ _("Type") }}</th>
-          <th>{{ _("Value") }}</th>
-        </tr>
-      </thead>
-      <tbody>
-      {% for row in memory %}{% for key, value in row %}
-      <tr>
-        <td><strong>{{ key }}</strong></td>
-        <td class="text-right">{{ value }}</td>
-      </tr>
-      {% endfor %}{% endfor %}
-      </tbody>
-    </table>
+<div class="panel panel-primary">
+  <div class="panel-heading">{{ _("Application Report") }}</div>
+  <div class="panel-body">
+    <dl class="dl-horizontal">
+      <dt>{{ _("Node") }}</dt>
+      <dd><code>{{ node }}</code></dd>
+      <dt>{{ _("Erlang Version") }}</dt>
+      <dd><code>{{ system_version }}</code></dd>
+      <dt>{{ _("Running Processes") }}</dt>
+      <dd>{{ proc_count }}</dd>
+      <dt>{{ _("System Architecture") }}</dt>
+      <dd><code>{{ architecture }}</code></dd>
+      <dt>{{ _("Language") }}</dt>
+      <dd><code>{{ language }}</code></dd>
+    </dl>
   </div>
 </div>
-<h2>{{ _("Request Headers") }}</h2>
-<table class="table table-hover table-striped table-bordered">
-  <thead>
-    <tr>
-      <th>{{ _("Header") }}</th>
-      <th>{{ _("Value") }}</th>
-    </tr>
-  </thead>
-  <tbody>
-  {% for row in headers %}{% for key, value in row %}
-  <tr>
-    <td><strong>{{ key }}</strong></td>
-    <td><code>{{ value }}</code></td>
-  </tr>
-  {% endfor %}{% endfor %}
-  </tbody>
-</table>
+<div class="row">
+  <div class="col-sm-6">
+    <div class="panel panel-primary">
+      <div class="panel-heading">{{ _("Loaded Applications") }}</div>
+      <table class="table table-hover table-striped table-bordered">
+        <thead>
+          <tr>
+            <th>{{ _("Application") }}</th>
+            <th>{{ _("Version") }}</th>
+            <th>{{ _("Description") }}</th>
+          </tr>
+        </thead>
+        <tbody>
+        {% for key, desc, version in apps %}
+          <tr>
+            <td><strong>{{ key }}</strong></td>
+            <td><code>{{ version }}</code></td>
+            <td>{{ desc }}</td>
+          </tr>
+        {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <div class="col-sm-6">
+    <div class="panel panel-primary">
+      <div class="panel-heading">{{ _("Memory Utilization") }}</div>
+      <table class="table table-hover table-striped table-bordered">
+        <tbody>
+        {% for row in memory %}{% for key, value in row %}
+          <tr>
+            <td><strong>{{ key }}</strong></td>
+            <td class="text-right">{{ value }}</td>
+          </tr>
+        {% endfor %}{% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+<div class="panel panel-primary">
+  <div class="panel-heading">{{ _("Request Headers") }}</div>
+  <table class="table table-hover table-striped table-bordered">
+    <tbody>
+    {% for row in headers %}{% for key, value in row %}
+      <tr>
+        <td><strong>{{ key }}</strong></td>
+        <td><code>{{ value }}</code></td>
+      </tr>
+    {% endfor %}{% endfor %}
+    </tbody>
+  </table>
+</div>
 {% endblock %}

@@ -1,14 +1,13 @@
-# cowtest
-# Copyright (C) 2014 cowtest
-# This file is distributed under the same license as the cowtest package.
-# Gavin M. Roy <gavinr@aweber.com>, 2014.
+# {{NAME}}
+# Copyright (C) 2014 {{NAME}}
+# This file is distributed under the same license as the {{NAME}} package.
 #
 #, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: cowtest 0.1.0\n"
+"Project-Id-Version: {{NAME}} 0.1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-11-17 18:14-0500\n"
+"POT-Creation-Date: 2014-11-17 21:24-0500\n"
 "PO-Revision-Date: 2014-MO-DA HO:MI+ZONE\n"
 "Last-Translator: Gavin M. Roy <gavinr@aweber.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,19 +16,19 @@ msgstr ""
 "Content-Type: text/plain; charset=ISO-8859-1\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: templates/home.dtl:23
+#: templates/home.dtl:28
 msgid "Application"
 msgstr "Application"
 
-#: templates/home.dtl:2 templates/home.dtl:4
+#: templates/home.dtl:2 templates/home.dtl:5
 msgid "Application Report"
 msgstr "Application Report"
 
-#: templates/home.dtl:24
+#: templates/home.dtl:30
 msgid "Description"
 msgstr "Description"
 
-#: templates/home.dtl:8
+#: templates/home.dtl:10
 msgid "Erlang Version"
 msgstr "Erlang Version"
 
@@ -37,46 +36,34 @@ msgstr "Erlang Version"
 msgid "Error"
 msgstr "Error"
 
-#: templates/home.dtl:63
-msgid "Header"
-msgstr "Header"
-
-#: templates/home.dtl:14
+#: templates/home.dtl:16
 msgid "Language"
 msgstr "Language"
 
-#: templates/home.dtl:19
+#: templates/home.dtl:24
 msgid "Loaded Applications"
 msgstr "Loaded Applications"
 
-#: templates/home.dtl:40
+#: templates/home.dtl:47
 msgid "Memory Utilization"
 msgstr "Memory Utilization"
 
-#: templates/home.dtl:6
+#: templates/home.dtl:8
 msgid "Node"
 msgstr "Node"
 
-#: templates/home.dtl:59
+#: templates/home.dtl:62
 msgid "Request Headers"
 msgstr "Request Headers"
 
-#: templates/home.dtl:10
+#: templates/home.dtl:12
 msgid "Running Processes"
 msgstr "Running Processes"
 
-#: templates/home.dtl:12
+#: templates/home.dtl:14
 msgid "System Architecture"
 msgstr "System Architecture"
 
-#: templates/home.dtl:44
-msgid "Type"
-msgstr "Type"
-
-#: templates/home.dtl:45 templates/home.dtl:64
-msgid "Value"
-msgstr "Value"
-
-#: templates/home.dtl:25
+#: templates/home.dtl:29
 msgid "Version"
 msgstr "Version"

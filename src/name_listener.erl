@@ -13,9 +13,7 @@
          terminate/2,
          code_change/3]).
 
-
 -include("{{NAME}}.hrl").
-
 
 %% ------------------------------------------------------------------
 %% API Function Definitions
@@ -23,7 +21,6 @@
 
 start_link() ->
   gen_server:start_link({local, ?MODULE}, ?MODULE, [], []).
-
 
 %% ------------------------------------------------------------------
 %% gen_server Function Definitions
@@ -61,7 +58,7 @@ code_change(_OldVsn, State, _Extra) ->
 on_response(Code, _Headers, _Body, Req) when is_integer(Code), Code >= 400 ->
     Message = proplists:get_value(Code, ?STATUS_CODES, <<"Undefined Error Code">>),
     Opts = [{translation_fun, ?TRANSLATE,
-            {locale, cowboy_req:meta(language, Req)}],
+            {locale, {{NAME}}_util::get_language(Req)}],
     {ok, Body} = error_page_dtl:render([{code, integer_to_list(Code)},
                                         {message, Message}], Opts),
     Headers = [{<<"Content-Type">>, <<"text/html">>}],
@@ -71,24 +68,11 @@ on_response(Code, _Headers, _Body, Req) when is_integer(Code), Code >= 400 ->
 on_response(_Code, _Headers, _Body, Req) ->
     Req.
 
-
 listener_count() ->
-    get_int_val("HTTP_LISTENER_COUNT", http_listener_count).
-
+    {{NAME}}_util:get_int_value("HTTP_LISTENER_COUNT", http_listener_count).
 
 port() ->
-    get_int_val("HTTP_PORT", http_port).
-
+    {{NAME}}_util:get_int_value("HTTP_PORT", http_port).
 
 timeout() ->
-    get_int_val("HTTP_TIMEOUT", http_timeout).
-
-
-get_int_val(OS, App) ->
-    case os:getenv(OS) of
-        false ->
-            {ok, Port} = application:get_env(App),
-            Port;
-        Other ->
-            list_to_integer(Other)
-    end.
+    {{NAME}}_util:get_int_value("HTTP_TIMEOUT", http_timeout).

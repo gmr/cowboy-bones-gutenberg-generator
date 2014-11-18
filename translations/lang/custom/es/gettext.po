@@ -1,78 +1,69 @@
-# Cowtest
-# Copyright (C) 2014 cowtest
-# Este archivo se distribuye bajo la misma licencia que el paquete cowtest.
-# Gavin M. Roy <gavinr@aweber.com>, 2014.
+# {{NAME}}
+# Copyright (C) 2014 {{NAME}}
+# This file is distributed under the same license as the {{NAME}} package.
 #
-#, Fuzzy
+#, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: 0.1.0 cowtest \ n"
-"Informe-MsgId-bugs-To: \ n"
-"POT-Creación-Fecha: 11/17/2014 16: 20 a 0500 \ n"
+"Project-Id-Version: {{NAME}} 0.1.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2014-11-17 20:24-0500\n"
 "PO-Revision-Date: 2014-MO-DA HO:MI+ZONE\n"
-"Last-Traductor: Gavin M. Roy <gavinr@aweber.com> \ n"
+"Last-Translator: Gavin M. Roy <gavinr@aweber.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
-"Idioma: \ n"
+"Language: \n"
 "MIME-Version: 1.0\n"
-"Content-Type: text / plain; charset = ISO-8859-1 \ n"
-msgid ""
+"Content-Type: text/plain; charset=ISO-8859-1\n"
+"Content-Transfer-Encoding: 8bit\n"
 
-#: Templates / home.dtl: 20
+#: templates/home.dtl:28
 msgid "Application"
-msgstr "Aplicación"
+msgstr "Applicación"
 
-#: Templates / home.dtl: 21
+#: templates/home.dtl:2 templates/home.dtl:5
+msgid "Application Report"
+msgstr "Aplicaciones de Informes"
+
+#: templates/home.dtl:30
 msgid "Description"
 msgstr "Descripción"
 
-#: Templates / home.dtl: 8
+#: templates/home.dtl:10
 msgid "Erlang Version"
 msgstr "Erlang Versión"
 
-#: Templates / error.dtl: 4
+#: templates/error.dtl:4
 msgid "Error"
 msgstr "Error"
 
-#: Templates / home.dtl: 58
-msgid "Header"
-msgstr "Cabecera"
+#: templates/home.dtl:16
+msgid "Language"
+msgstr "Idioma"
 
-#: Templates / home.dtl: 16
-msgid "msgid "Error""
+#: templates/home.dtl:24
+msgid "Loaded Applications"
 msgstr "Aplicaciones Loaded"
 
-#: Templates / home.dtl: 36
+#: templates/home.dtl:47
 msgid "Memory Utilization"
-msgstr "uso de la memoria"
+msgstr "Utilización de la memoria"
 
-#: Templates / home.dtl: 6
+#: templates/home.dtl:8
 msgid "Node"
-msgstr "Nodo"
+msgstr "Node"
 
-#: Templates / home.dtl: 54
+#: templates/home.dtl:62
 msgid "Request Headers"
-msgstr "Cabeceras de Solicitud"
+msgstr "Encabezados de Solicitud"
 
-#: Templates / home.dtl: 10
+#: templates/home.dtl:12
 msgid "Running Processes"
-msgstr "Ejecución de Procesos"
+msgstr "Procesos en Ejecución"
 
-#: Templates / home.dtl: 12
+#: templates/home.dtl:14
 msgid "System Architecture"
-msgstr "Arquitectura del sistema"
+msgstr "Arquitectura del Sistema"
 
-#: Templates / home.dtl: 2 plantillas / home.dtl: 4
-msgid "System Report"
-msgstr "del sistema"
-
-#: Templates / home.dtl: 40
-msgid "Type"
-msgstr "Tipo"
-
-#: Templates / home.dtl: 41 plantillas / home.dtl: 59
-msgid "Value"
-msgstr "Valor"
-
-#: Templates / home.dtl: 22
+#: templates/home.dtl:29
 msgid "Version"
 msgstr "Versión"
