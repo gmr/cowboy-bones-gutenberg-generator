@@ -64,7 +64,7 @@ on_response(Code, _Headers, _Body, Req) when is_integer(Code), Code >= 400 ->
                                    {message, Message}], Opts),
     cowboy_req:reply(Code, [{<<"Content-Type">>, <<"text/html">>}], Body, Req);
 
-on_response(_Code, _Headers, _Body, Req) ->
+on_response(Code, _Headers, _Body, Req) ->
     lager:log(info, self(), "~p ~s ~s", [Code, cowboy_req:method(Req), cowboy_req:path(Req)]),
     Req.
 
