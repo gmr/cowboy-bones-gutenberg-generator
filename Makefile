@@ -42,7 +42,7 @@ clean:
 	@( rm -f translations/gettext_server_db.dets )
 
 run:
-	@( erl -pa  ebin deps/*/ebin -s {{NAME}} )
+	@( erl +W w -pa ebin deps/*/ebin -config rel/sys.config -sname {{NAME}} -s {{NAME}} )
 
 release: compile
 	@( $(RELX) release )

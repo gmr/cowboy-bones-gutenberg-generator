@@ -56,16 +56,16 @@ code_change(_OldVsn, State, _Extra) ->
 %% ------------------------------------------------------------------
 
 on_response(Code, _Headers, _Body, Req) when is_integer(Code), Code >= 400 ->
+    lager:log(info, self(), "~p ~s ~s", [Code, cowboy_req:method(Req), cowboy_req:path(Req)]),
     Message = proplists:get_value(Code, ?STATUS_CODES, <<"Undefined Error Code">>),
     Opts = [{translation_fun, ?TRANSLATE,
             {locale, {{NAME}}_util:get_language(Req)}],
-    {ok, Body} = error_page_dtl:render([{code, integer_to_list(Code)},
-                                        {message, Message}], Opts),
-    Headers = [{<<"Content-Type">>, <<"text/html">>}],
-    {ok, Req2} = cowboy_req:reply(Code, Headers, Body, Req),
-    Req2;
+    {ok, Body} = error_dtl:render([{code, integer_to_list(Code)},
+                                   {message, Message}], Opts),
+    cowboy_req:reply(Code, [{<<"Content-Type">>, <<"text/html">>}], Body, Req);
 
 on_response(_Code, _Headers, _Body, Req) ->
+    lager:log(info, self(), "~p ~s ~s", [Code, cowboy_req:method(Req), cowboy_req:path(Req)]),
     Req.
 
 listener_count() ->

@@ -1,5 +1,5 @@
 {% extends "base.dtl" %}
-{% block title %}cowtest {{ _("Application Report") }}{% endblock %}
+{% block title %}{{NAME}} {{ _("Application Report") }}{% endblock %}
 {% block content %}
 <div class="panel panel-primary">
   <div class="panel-heading">{{ _("Application Report") }}</div>
